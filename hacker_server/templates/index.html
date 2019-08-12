@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block body %}
+
+<div class="columns is-mobile is-centered">
+        <div class="column is-half">
+          <p class="bd-notification is-primary">
+                <div class="block">
+                    <h1 class="title is-1">Hacker Site</h1>
+                    <div class="box">
+                        <h1 class="title">Stolen Cookies</h1>   
+                        <ul>                            
+                            {% for cookie in cookies %}
+                            <li>{{ cookie }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+          </p>
+        </div>
+    </div>
+
+{% endblock %}
