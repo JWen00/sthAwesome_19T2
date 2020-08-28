@@ -2,7 +2,6 @@ from flask import render_template, request, redirect, url_for, make_response
 from server import app 
 import hashlib
 import uuid 
-import src.create_database
 
 
 '''
@@ -17,10 +16,10 @@ def lazy(*args):
 '''
 Storage of user login details 
 
-db = { 
+user_db = { 
     "username" : {
         passwd: "password", 
-        msgs: [
+        notes: [
             "note1", 
             "note2", 
         ]
@@ -60,42 +59,45 @@ def main():
         token = request.cookies.get('token')
         if token not in token_db:
             return redirect(url_for("login"))
-        return lazy(render_template('index.html', cookie_value=token, msgs=user_db[usr][notes])
+        return lazy(render_template('index.html', cookie_value=token, notes=user_db[token_db[token]]["notes"]))
  
     if request.method == "POST":
         usernm = request.form['name'] 
         passwd = request.form['password'] 
-        passwd_hash = hashlib.md5((name + ":" + password).encode()).hexdigest()
+        passwd_hash = hashlib.md5((usernm + ":" + passwd).encode()).hexdigest()
 
         # Make new account
         if usernm not in user_db:
-            user_db[usernm]["passwd"] = passwd_hash
-            user_db[usernm]["msgs"] = [] 
+            user_db[usernm] = { 
+                "passwd": passwd_hash,
+                "notes": [],
+            }
         elif user_db[usernm]["passwd"] != passwd_hash: 
             return lazy(render_template("login.html", error="true")) 
 
-        token = uuid.uuid4() 
-        res = lazy(redirect(url_for("main", username=usernm)))
+        token = uuid.uuid4().hex
+        token_db[token] = usernm
+        res = lazy(render_template('index.html', username=usernm, cookie_value=token, notes=[]))
         res.set_cookie('token', token, 60*60*24)
         return res
 
     return ":X"
 
 '''
-User adding new msg to their dashboard
+User adding new note to their dashboard
 '''
-@app.route('/post_msg', methods=["POST"])
-def post_msg(): 
+@app.route('/post_note', methods=["POST"])
+def post_note(): 
     token = request.cookies.get("token")
 
     if token not in user_db:
         return redirect(url_for("login"))
     
-    msg = request.form['msg']
+    note = request.form['note']
     usr = token_db[token]
-    user_db[usr][notes].append(msg)
+    user_db[usr]["notes"].append(note)
 
-    return lazy(render_template('index.html', cookie_value=token, msgs=user_db[usr][notes]))
+    return lazy(render_template('index.html', cookie_value=token, notes=user_db[usr]["notes"]))
 
 
 
