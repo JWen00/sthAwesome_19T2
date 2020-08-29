@@ -1,41 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>xxs_demo</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-</head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"
+    />
+  </head>
 
-<body>
-<div class="columns is-mobile is-centered">
-    <div class="column is-half">
-        <p class="bd-notification is-primary">
-            <div class="block">
-                <h1 class="title is-1">Very Secure Website</h1>
-                <div class="box">
-                    <h1 class="title">Welcome, login or signup!</h1>   
-                        
-                        <form method="POST" action="{{ url_for('main') }}"> 
-                            <div class="field">
-                                <label class="label">Name</label>
-                                <input type="text" class="input" name="name" placeholder="your name"> 
-                            </div>
-                            <div class="field">
-                                <label class="label">Password</label>
-                                {% if error == 'true' %} 
-                                    <input type="text" class="input is-danger" name="password" placeholder="your password">
-                                {% else %}
-                                    <input type="text" class="input" name="password" placeholder="your password">
-                                {% endif %} 
-                            </div>
-                            <button type="submit" name="submit" class="button is-success is-medium is-centered">Login</button>
-                    </form>
+  <body>
+    <div class="columns is-mobile is-centered">
+      <div class="column is-two-thirds">
+        <h1 class="title is-1">Very Secure Website</h1>
+        <br />
+        <div class="columns">
+          <div class="column is-one-third">
+            <h1 class="title">
+              Welcome,<br />
+              login or signup!
+            </h1>
+          </div>
+          <div class="column is-three-fifths">
+            <div class="box">
+              <form method="POST" action="{{ url_for('main') }}">
+                <div class="field">
+                  <label class="label">Name</label>
+                  <input
+                    type="text"
+                    class="input"
+                    name="name"
+                    placeholder="your name"
+                  />
                 </div>
+                <div class="field">
+                  <label class="label">Password</label>
+                  {% if error == 'true' %}
+                  <input
+                    type="text"
+                    class="input is-danger"
+                    name="password"
+                    placeholder="your password"
+                  />
+                  {% else %}
+                  <input
+                    type="text"
+                    class="input"
+                    name="password"
+                    placeholder="your password"
+                  />
+                  {% endif %}
+                </div>
+                <button
+                  type="submit"
+                  name="submit"
+                  class="button is-success is-medium is-centered"
+                >
+                  Login
+                </button>
+              </form>
             </div>
-          </p>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

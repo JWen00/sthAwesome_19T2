@@ -27,10 +27,12 @@ user_db = {
 }
 
 token_db = { 
-    "token" : usernm 
+    "token" : "usernm" 
 }
 
 Normally this would be stored within a database, NOT done like this. 
+
+Token storing can be much better managed, but will be kept simple for the demo. 
 '''
 user_db = {}
 token_db = {} 
@@ -59,7 +61,8 @@ def main():
         token = request.cookies.get('token')
         if token not in token_db:
             return redirect(url_for("login"))
-        return lazy(render_template('index.html', cookie_value=token, notes=user_db[token_db[token]]["notes"]))
+        usernm = token_db[token]
+        return lazy(render_template('index.html', username=usernm, cookie_value=token, notes=user_db[usernm]["notes"]))
  
     if request.method == "POST":
         usernm = request.form['name'] 
@@ -89,15 +92,14 @@ User adding new note to their dashboard
 @app.route('/post_note', methods=["POST"])
 def post_note(): 
     token = request.cookies.get("token")
-
-    if token not in user_db:
+    if token not in token_db:
         return redirect(url_for("login"))
     
     note = request.form['note']
-    usr = token_db[token]
-    user_db[usr]["notes"].append(note)
+    usernm = token_db[token]
+    user_db[usernm]["notes"].append(note)
 
-    return lazy(render_template('index.html', cookie_value=token, notes=user_db[usr]["notes"]))
+    return lazy(render_template('index.html', cookie_value=token, notes=user_db[usernm]["notes"], ))
 
 
 
