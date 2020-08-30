@@ -103,5 +103,9 @@ def post_note():
 
 
 
-
-    
+'''
+User wants to be hacked 
+'''
+@app.route('/hack_me', methods=["GET"])
+def hack_me(): 
+    return lazy(render_template('hacked.html')) 

